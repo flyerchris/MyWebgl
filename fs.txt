@@ -1,0 +1,37 @@
+varying highp vec4 fnormal;
+varying highp vec4 vpos;
+varying highp vec2 ftxuv;
+uniform int hastex;
+uniform int sel;
+
+uniform sampler2D uSampler;
+
+void main(void){
+	highp vec4 light=vec4(1000.0,1000.0,0.0,1);
+	highp vec4 eye=vec4(0.0,0.0,0.0,1);
+	highp vec4 eyedir=eye-vpos;
+	highp vec4 ldir=light-vpos;
+	highp vec4 rdir=reflect(-ldir,fnormal);
+	
+	highp float spectlight=max(0.0,dot(rdir,eyedir));
+	spectlight=spectlight/length(rdir)/length(eyedir);
+	spectlight=pow(spectlight,150.0);
+	spectlight*=0.8;
+	
+	highp float color=max(0.0,dot(fnormal,ldir));
+	color/=(length(fnormal)*length(ldir));
+	color+=0.05;
+	color+=spectlight;
+	if(color>1.0){
+		color=1.0;
+	}
+	highp float selcol=0.0;
+	if(sel==1){
+		selcol=0.3;
+	}
+	highp vec4 txsm=texture2D(uSampler, ftxuv);
+	 if(hastex==1)
+		gl_FragColor = vec4(txsm.xy*color+selcol,txsm.z*color,1);
+	 else
+		gl_FragColor =vec4(color,color,color,1);
+}

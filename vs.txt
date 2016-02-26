@@ -1,0 +1,31 @@
+attribute vec3 p;
+attribute vec3 normal;
+attribute vec2 txuv;
+
+varying vec4 fnormal;
+varying vec4 vpos;
+varying vec2 ftxuv;
+
+uniform mat4 projmat;
+uniform mat4 transmat;
+uniform float zoffset;
+
+void main(){
+	fnormal=transmat*vec4(normal,0.0);
+	ftxuv=txuv;
+	vec4 pos=vec4(p,1.0);
+	//pos.y=0.3 * sin( (pos.x*pos.x + pos.z*pos.z));
+	//highp vec3 xtan,ztan;
+	//xtan=vec3(1.0,0.0,0.0);
+	//ztan=vec3(0.0,0.0,1.0);
+	//xtan.y=2.0*0.3*pos.x*cos((pos.x*pos.x + pos.z*pos.z));
+	//ztan.y=2.0*0.3*pos.z*cos((pos.x*pos.x + pos.z*pos.z));
+	//fnormal=vec4(-1.0*normalize(cross(xtan,ztan)),0.0);
+	
+	pos=transmat*pos;
+	pos.z+=zoffset;
+	pos.y-=0.4;
+	vpos=pos;
+	pos=projmat*pos;
+	gl_Position=pos;
+}

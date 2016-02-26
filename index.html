@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Webgl</title>
+</head>
+<body>
+<script src="jquery-2.1.4.js"></script>
+<script src="gl-matrix.js"></script>
+<script src="objLoader.js"></script>
+<script src="main.js"></script>
+<canvas id="canvas2d" width="720" height="480" style="border: 1px dashed #c3c3c3;position:absolute">
+遺憾，你的瀏覽器不支援canvas
+</canvas>
+<canvas id="glCnavas" width="720" height="480" style="border: 1px dashed #c3c3c3;">
+遺憾，你的瀏覽器不支援canvas
+</canvas><br>
+Rotate X :<input type="range" min="-180" max="180" onInput="rotX(value)"><p id="rxtext" style="display:inline-block;">0&#176;,</p>
+Y :<input type="range" min="-180" max="180" onInput="rotY(value)"><p id="rytext" style="display:inline-block;">0&#176;,</p>
+Z :<input type="range" min="-180" max="180" onInput="rotZ(value)"><p id="rztext" style="display:inline-block;">0&#176; </p><br>
+Z-offset:<input type="range" min="-250" max="-2" onInput="zoff(value)" style="width:300px;" step="0.125" value="-5"><p id="zoffset" style="display:inline-block;">-5</p>
+<input type="checkbox" onclick="selObj(0,checked)">cat<input type="checkbox" onclick="selObj(1,checked)">ground
+<br><img id="groundtex" src="texture.jpg" style="display:none;"/>
+<img id="cattex" src="cat.jpg" style="display:none;"/>
+</body>
+
+</html>
