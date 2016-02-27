@@ -111,7 +111,6 @@ function setupObj(objdata,tex,objind){
 	
 	var hastex=gl.getUniformLocation(program,"hastex");
 	if(tb.vt.length>0){
-		console.log("has texture");
 		gl.uniform1i(hastex,1);
 		hasTexArray.push(1);
 		var tximg=imgData(tex);
